@@ -1,12 +1,13 @@
 package kata01_42;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Person {
     private final String name;
-    private final Date birthday;
-        
-    public Person(String name, Date birthday){
+    private final Calendar birthday;
+    
+    public Person(String name, Calendar birthday){
         this.name = name;
         this.birthday = birthday;
     }
@@ -16,22 +17,9 @@ public class Person {
     }
         
     public int getAge(){
-        /*Date timeNow = new Date();
-        timeNow.setTime(System.currentTimeMillis());*/
-        return(int) ((new Date().getTime()-birthday.getTime())/31536000000L);
-        /*int edad = timeNow.getYear()- birthday.getYear();
-        
-        if(birthday.getMonth()>timeNow.getMonth()){
-            return edad;
-        }else if(birthday.getMonth()<timeNow.getMonth()){
-            return edad-1;
-        }else{
-            if(birthday.getDay()>timeNow.getDay()){
-                return edad;
-            }else{
-                return edad-1;
-            }
-        }*/
+        Calendar now = GregorianCalendar.getInstance();
+        final long milliseconsPerYear = (long) (365.25*24*60*60*1000L);
+        return (int) ((now.getTimeInMillis()-birthday.getTimeInMillis())/milliseconsPerYear);
     }
 }
 
